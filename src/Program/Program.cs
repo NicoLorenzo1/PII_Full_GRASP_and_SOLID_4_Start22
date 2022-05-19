@@ -19,11 +19,14 @@ namespace Full_GRASP_And_SOLID
         public static void Main(string[] args)
         {
             PopulateCatalogs();
-
+            //Se aplica el patron creator ya que program no tenía que tener la responsabilidad de crear instancias de step, por lo tanto
+            //si aplicamos creator le asignamos la responsabilidad de crear instancias de step a la clase que lo necesita, en este caso es
+            //"Recipe", además de esta conocer todo lo necesario para hacerlo.
             Recipe recipe = new Recipe();
             recipe.FinalProduct = GetProduct("Café con leche");
-            recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
-            recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
+            recipe.AddStep(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120);
+            recipe.AddStep(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60);
+            recipe.AddStep(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120);
 
             IPrinter printer;
             printer = new ConsolePrinter();
